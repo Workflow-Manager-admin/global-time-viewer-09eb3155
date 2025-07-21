@@ -1,104 +1,273 @@
-/* CSS Variables for Theme Management */
+/* Modern Minimal World Clock App - Custom Light Theme */
+
+/* Root color palette */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --color-primary: #1e293b;    /* main header, sidebar bg */
+  --color-secondary: #64748b;  /* subtle text and borders */
+  --color-accent: #38bdf8;     /* highlights, add buttons */
+  --color-bg: #f8fafc;
+  --color-card-bg: #fff;
+  --color-card-shadow: 0 1px 4px rgba(30, 41, 59, 0.05);
+  --color-border: #e2e8f0;
+  --color-empty: #b2becd;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
-
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+body,
+.global-clock-app {
+  background: var(--color-bg);
+  color: var(--color-primary);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  font-size: 16px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.top-header {
+  width: 100%;
+  background: var(--color-primary);
+  padding: 0 0.5rem;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 5px rgba(30,41,59,0.1);
+  z-index: 1;
+}
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+  padding-left: 0.2em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.main-content {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto 0 auto;
+  flex: 1 1 auto;
+  min-height: 65vh;
+  gap: 2.5rem;
+  align-items: flex-start;
 }
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.sidebar {
+  background: var(--color-card-bg);
+  border-radius: 1.3rem;
+  box-shadow: var(--color-card-shadow);
+  min-width: 260px;
+  max-width: 320px;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
+  gap: 1.2rem;
+}
+.sidebar-header {
+  font-size: 1.1rem;
+  color: var(--color-secondary);
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+.search-input {
+  border: 1px solid var(--color-secondary);
+  padding: 0.65em 1em;
+  border-radius: 0.7em;
+  outline: none;
+  margin-bottom: 0.7em;
+  font-size: 1rem;
+  background: var(--color-bg);
+}
+.search-input:focus {
+  border-color: var(--color-accent);
+}
+
+.city-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.38rem;
+}
+.city-option {
+  background: #ecfeff;
+  padding: 0.6em 0.9em 0.5em 1.1em;
+  border: 1.5px solid var(--color-accent);
+  border-radius: 0.7em;
+  font-size: 1rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  text-align: left;
+  margin: 0;
+  cursor: pointer;
+  transition: background 0.16s, border-color 0.16s;
+  display: flex;
+  flex-direction: column;
+}
+.city-option .country {
+  font-size: 0.89em;
+  color: var(--color-secondary);
+  font-weight: 400;
+  margin-left: 1ch;
+}
+.tz-label {
+  font-size: 0.87em;
+  color: var(--color-secondary);
+  margin-top: 1px;
+  margin-left: 2px;
+}
+
+.city-option:hover, .city-option:focus {
+  background: #d2f6fd;
+  border-color: #1bb8ea;
+}
+
+.no-city {
+  padding: 0.7em 0;
+  color: var(--color-empty);
+  font-size: 1em;
+}
+
+.clocks-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  flex: 1;
+  min-width: 0;
+  align-items: flex-start;
+}
+
+.clock-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.07rem;
+  background: var(--color-card-bg);
+  border-radius: 1em;
+  min-width: 245px;
+  max-width: 270px;
+  padding: 1.3rem 1.3rem 1.1rem 1.3rem;
+  box-shadow: var(--color-card-shadow);
+  border: 1.2px solid var(--color-border);
+  margin-bottom: 0.4em;
+  transition: border-color 0.14s, box-shadow 0.16s;
   position: relative;
 }
-
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.clock-card:hover, .clock-card:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 2px 10px 2px rgba(56,189,248, 0.07);
 }
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+.clock-city {
+  font-size: 1.17em;
   font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.remove-btn {
+  background: transparent;
+  border: none;
+  color: #e11d48; /* rose-600 */
+  font-size: 1.2em;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 0.6em;
+  line-height: 1;
+  border-radius: 6px;
+  transition: background 0.12s, color 0.19s;
+  padding: 1px 6px;
+}
+.remove-btn:hover, .remove-btn:focus {
+  background: #fee2e2; /* rose-100 */
+  color: #be123c;
+}
+.clock-time {
+  font-size: 2.2em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.18em;
+  color: var(--color-accent);
+}
+.clock-tz {
+  font-size: 0.97em;
+  color: var(--color-secondary);
+  margin-top: 0.27em;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.empty-msg {
+  color: var(--color-secondary);
+  padding: 2.7rem 0;
+  font-size: 1.21rem;
+  letter-spacing: 0.01em;
+  opacity: 0.87;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.footer {
+  width: 100%;
+  min-height: 3rem;
+  margin: 0;
+  text-align: center;
+  background: #f2f8fc;
+  color: var(--color-secondary);
+  font-size: 1rem;
+  padding: 0.8rem 0 1.1rem 0;
+  letter-spacing: 0.01em;
+  border-top: 1px solid #e0eaef;
+  margin-top: 4rem;
+}
+.footer a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer a:hover {
+  text-decoration: underline;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Mobile responsiveness */
+@media (max-width: 900px) {
+  .main-content {
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+    align-items: stretch;
+    min-width: 0;
   }
-  to {
-    transform: rotate(360deg);
+  .sidebar {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    border-radius: 1em;
+    padding: 1.2rem 1.2rem 1.1rem 1.2rem;
+  }
+  .clocks-area {
+    justify-content: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+    min-width: 0;
+  }
+  .clock-card {
+    min-width: 99vw;
+    max-width: none;
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .sidebar,
+  .main-content {
+    padding: 0;
+    margin: 0;
+    gap: 0.8rem;
+  }
+  .clock-card {
+    padding: 1rem 0.7rem 0.8rem 0.7rem;
+  }
+  .footer {
+    font-size: 0.94rem;
+    padding: 0.5rem 0 0.6rem 0;
   }
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+/* Hide unneeded focus outlines except for keyboard users */
+*:focus:not(:focus-visible) {
+  outline: none;
 }
